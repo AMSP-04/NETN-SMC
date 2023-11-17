@@ -1,11 +1,11 @@
-# New Module
+# NETN-SMC
 
 
 |Version| Date| Dependencies|
 |---|---|---|
-|1.0|||
+|1.0|2023-11-17||
 
-> [Full Documentation](New Module.md)
+> [Full Documentation](NETN-SMC.md)
 
 
 
@@ -17,7 +17,7 @@ Description of New Module
 
 Copyright (C) 2020 NATO/OTAN. This work is licensed under a [Creative Commons Attribution-NoDerivatives 4.0 International License](LICENCE.md).
 
-The work includes the New Module.xml FOM Module and documentation.
+The work includes the NETN-SMC.xml FOM Module and documentation.
 
 The licence gives you the right to use and redistribute the NETN FOM Module (XML file and Documentation) in its entirety without modification. You are also allowed to develop new FOM Modules (in separate XML files and separate documentation) that build on or extend the NETN module by referencing and including necessary scaffolding classes. You are NOT allowed to modify this FOM Module or its documentation without prior permission from the NATO Modelling and Simulation Group.
 

@@ -1,8 +1,8 @@
 
-# New Module
+# NETN-SMC
 |Version| Date| Dependencies|
 |---|---|---|
-|1.0|||
+|1.0|2023-11-17||
 
 
 
