@@ -10,6 +10,26 @@ In a federated distributed simulation, the participating systems (federates) pro
 
 The NETN-SMC FOM module provide base classes for object and interactions to control and describe services in the federation. The provided control action classes are neither publishable nor subscribable but provide the basis for subclassing in other FOM modules.
 
+## Overview
+This module provides base classes for sending control actions affecting the federation. Direct the control action by using three different methods.
+
+* Use the `SMC_FederationControl` for control actions intended for all federates.
+* Use `SMC_FederateControl` for control actions intended for a known federate
+* Use `SMC_EntityControl` for control actions intended for a federate with the modelling responsibility for the entity.
+
+In the case of `SMC_FederateControl` and `SMC_EntityControl`, the receiving federate shall respond to the action using a `SMC_Response` interaction to indicate success or failure to accept or achieve the action.
+
+Federates supporting NETN-SMC control interactions shall publish one or more `SMC_Service` objects in the federation. The `SMC_Service` object class and any subclass defined in other modules define the services provided by the federate. In addition, the `SMC_Service` object class defines a set of supported `FederateControlActions`. The `FederateControlActionEnum` datatype enumerates available types of federate control actions and allows for extension in other modules.
+
+The `BaseEntity` object class is extended with a list of supported `EntityControlActions`. The `EntityControlActionEnum` datatype enumerates available types of entity control actions and allows for extension in other modules.
+
+Before sending an `SMC_FederateControl`, use the `SMC_Service` object attribute `SupportedActions` to determine if the referenced federate supports the action.
+
+Before sending an `SMC_EntityControl`, use the `NETN-SMC BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action.
+
+
+            
+
 
 ## Object Classes
 
@@ -57,28 +77,28 @@ Base class for all control actions applicable to all federates in the federation
 
 ### SMC_FederateControl
 
-Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the `SMC_Service` object attribtue `SupportedActions` to determine if the referenced federate supports the action.
+Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the `SMC_Service` object attribute `SupportedActions` to determine if the referenced federate supports the action.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
-|Federate|FederateName|Required: The federate indented as the receiver of this control action.|
+|Federate|FederateName|Required: The federate intended as the receiver of this control action.|
 
 ### SMC_EntityControl
 
-Control action intended for a federate with primary modelling responsibility for the referened entity. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the NETN-SMC `BaseEntity` object attribtue `SupportedActions` to determine if the referenced entity supports the action.
+Control action intended for a federate with primary modelling responsibility for the referenced entity. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the NETN-SMC `BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
-|Entity|UUID|Reference to a simulation entity for which the control action is inteded.|
+|Entity|UUID|Reference to a simulation entity for which the control action is intended.|
 
 ### SMC_Response
 
-The response provide an indication if the related action was accepted or rejected/failed by a federate. A single response per sent action is expected.
+The response provides an indication if the related action was accepted or rejected/failed by a federate. A single response per sent action is expected.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
-|Action|UUID|Required: Reference to the contol action this is a response to. The reference corresponds to the NETN-BASE `UniqueId` parameter of the control action interaction.|
-|Status|HLAboolean|Required: Indicates success of failure of a corresonding control action.|
+|Action|UUID|Required: Reference to the control action this is a response to. The reference corresponds to the NETN-BASE `UniqueId` parameter of the control action interaction.|
+|Status|HLAboolean|Required: Indicates success or failure of a corresponding control action.|
 
 ## Datatypes
 
@@ -88,7 +108,7 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 |Name|Semantics|
 |---|---|
 |EntityControlActionEnum|Control actions for entities.|
-|EntityControlActions|A set of control actions relevant for individual entities in the simulation.|
+|EntityControlActions|A set of control actions relevant to individual entities in the simulation.|
 |FederateControlActionEnum|SMC Control action enumeration.|
 |FederateControlActions|A set of control actions for the federate implementing the service.|
         
@@ -101,6 +121,6 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 ### Array Datatypes
 |Name|Element Datatype|Semantics|
 |---|---|---|
-|EntityControlActions|EntityControlActionEnum|A set of control actions relevant for individual entities in the simulation.|
+|EntityControlActions|EntityControlActionEnum|A set of control actions relevant to individual entities in the simulation.|
 |FederateControlActions|FederateControlActionEnum|A set of control actions for the federate implementing the service.|
     
