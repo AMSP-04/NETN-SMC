@@ -65,7 +65,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Required: Indicates which SMC control ations are supported by the referenced federate.</semantics>
+                    <semantics>Required: Indicates which SMC control actions are supported by the referenced federate.</semantics>
                 </attribute>
             </objectClass>
             <objectClass notes="COPY-RPRnoteBase1">
@@ -101,7 +101,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                 <sharing>Neither</sharing>
                 <transportation>HLAreliable</transportation>
                 <order>Receive</order>
-                <semantics>Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`.</semantics>
+                <semantics>Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the `SMC_Service` object attribtue `SupportedActions` to determine if the referenced federate supports the action.</semantics>
                 <parameter>
                     <name>Federate</name>
                     <dataType>FederateName</dataType>
@@ -113,7 +113,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                 <sharing>Neither</sharing>
                 <transportation>HLAreliable</transportation>
                 <order>Receive</order>
-                <semantics>Control action intended for a federate with primary modelling responsibility for the referened entity. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`.</semantics>
+                <semantics>Control action intended for a federate with primary modelling responsibility for the referened entity. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the NETN-SMC `BaseEntity` object attribtue `SupportedActions` to determine if the referenced entity supports the action.</semantics>
                 <parameter>
                     <name>Entity</name>
                     <dataType>UUID</dataType>

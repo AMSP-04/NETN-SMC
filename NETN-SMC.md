@@ -28,7 +28,7 @@ Represents a service provided by the referenced federate with additional informa
 |Attribute|Datatype|Semantics|
 |---|---|---|
 |Federate|FederateName|Required: The federate providing the service.|
-|SupportedActions|FederateControlActions|Required: Indicates which SMC control ations are supported by the referenced federate.|
+|SupportedActions|FederateControlActions|Required: Indicates which SMC control actions are supported by the referenced federate.|
 
 ### BaseEntity
 
@@ -57,7 +57,7 @@ Base class for all control actions applicable to all federates in the federation
 
 ### SMC_FederateControl
 
-Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`.
+Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the `SMC_Service` object attribtue `SupportedActions` to determine if the referenced federate supports the action.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
@@ -65,7 +65,7 @@ Base class for all control actions directed to a specific federate. The inherite
 
 ### SMC_EntityControl
 
-Control action intended for a federate with primary modelling responsibility for the referened entity. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`.
+Control action intended for a federate with primary modelling responsibility for the referened entity. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the NETN-SMC `BaseEntity` object attribtue `SupportedActions` to determine if the referenced entity supports the action.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
