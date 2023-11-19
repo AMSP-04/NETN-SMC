@@ -199,6 +199,16 @@ Before sending an `SMC_FederateControl`, use the `SMC_Service` object attribute 
 
 Before sending an `SMC_EntityControl`, use the `NETN-SMC BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action.
 
+The standard Request-Response pattern involves a TaskingFederate sending a `SMC_EntityControl` or `SMC_FederateControl` interaction.
+The referenced federate or the federate responsible for modelling the entity replies using the `SMC_Response` interaction, indicating whether the requested tasking is accepted and successful.
+ 
+```mermaid 
+sequenceDiagram 
+autonumber
+TaskingFederate-&gt;&gt;EntityFederate:SMC_EntityControl(entity) 
+EntityFederate-&gt;&gt;TaskingFederate:SMC_Response(true/false) 
+```` 
+
 
             </semantics>
         </note>
