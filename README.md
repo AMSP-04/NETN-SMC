@@ -3,7 +3,7 @@
 
 |Version| Date| Dependencies|
 |---|---|---|
-|1.0|2023-11-18|NETN-BASE|
+|1.0|2023-11-20|NETN-BASE|
 
 > [Full Documentation](NETN-SMC.md)
 
