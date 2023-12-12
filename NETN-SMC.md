@@ -40,12 +40,15 @@ EntityFederate->>TaskingFederate:SMC_Response(true/false)
 
 ## Object Classes
 
-Note that inherited and dependency attributes are not included in the description of object classes.
-
 ```mermaid
-graph RL
-SMC_Service-->HLAobjectRoot
-BaseEntity-->HLAobjectRoot
+classDiagram 
+direction LR
+
+HLAobjectRoot <|-- SMC_Service
+HLAobjectRoot <|-- BaseEntity
+SMC_Service : Federate
+SMC_Service : SupportedActions
+BaseEntity : SupportedActions
 ```
 
 ### SMC_Service
@@ -67,14 +70,17 @@ A base class of aggregate and discrete scenario domain participants. The BaseEnt
 
 ## Interaction Classes
 
-Note that inherited and dependency parameters are not included in the description of interaction classes.
-
 ```mermaid
-graph RL
-SMC_FederationControl-->HLAinteractionRoot
-SMC_FederateControl-->HLAinteractionRoot
-SMC_EntityControl-->HLAinteractionRoot
-SMC_Response-->HLAinteractionRoot
+classDiagram 
+direction LR
+HLAinteractionRoot <|-- SMC_FederationControl
+HLAinteractionRoot <|-- SMC_FederateControl
+HLAinteractionRoot <|-- SMC_EntityControl
+HLAinteractionRoot <|-- SMC_Response
+SMC_FederateControl : Federate
+SMC_EntityControl : Entity
+SMC_Response : Action
+SMC_Response : Status
 ```
 
 ### SMC_FederationControl

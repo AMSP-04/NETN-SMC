@@ -119,7 +119,7 @@ Above license gives you the right to use and redistribute this FOM Module (XML f
                 <parameter>
                     <name>Entity</name>
                     <dataType>UUID</dataType>
-                    <semantics>Reference to a simulation entity for which the control action is intended.</semantics>
+                    <semantics>Required: Reference to a simulation entity for which the control action is intended.</semantics>
                 </parameter>
             </interactionClass>
             <interactionClass>
