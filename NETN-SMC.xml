@@ -209,5 +209,9 @@ TaskingFederate-&gt;&gt;EntityFederate:SMC_EntityControl(entity)
 EntityFederate-&gt;&gt;TaskingFederate:SMC_Response(true/false) 
 ````</semantics>
         </note>
+        <note>
+            <label>netn-smc_changelog</label>
+            <semantics></semantics>
+        </note>
     </notes>
 </objectModel>
