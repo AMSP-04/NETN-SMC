@@ -102,7 +102,7 @@ Control action intended for a federate with primary modelling responsibility for
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
-|Entity|UUID|Reference to a simulation entity for which the control action is intended.|
+|Entity|UUID|Required: Reference to a simulation entity for which the control action is intended.|
 
 ### SMC_Response
 
