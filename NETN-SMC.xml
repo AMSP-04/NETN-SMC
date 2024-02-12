@@ -204,7 +204,7 @@ The referenced federate or the federate responsible for modelling the entity rep
  
 ```mermaid 
 sequenceDiagram 
-autonumber 
+autonumber
 TaskingFederate-&gt;&gt;EntityFederate:SMC_EntityControl(entity) 
 EntityFederate-&gt;&gt;TaskingFederate:SMC_Response(true/false) 
 ````</semantics>
