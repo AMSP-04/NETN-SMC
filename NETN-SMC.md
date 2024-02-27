@@ -6,9 +6,9 @@
 
 The NATO Education and Training Service Management and Control (NETN-SMC) module provides a standard way to send control actions to a federated simulation. The control actions are interactions targeting the federation, an individual federate or an individual simulated entity.
 
-In a federated distributed simulation, the participating systems (federates) provide services to model the synthetic environment. The services use information published in the federation as input and provides data updates and interactions as output. Use control actions to change or trigger service behaviour.
+In a federated distributed simulation, the participating systems (federates) provide services to model the synthetic environment. The services use information published in the federation as input, providing data updates and interactions as output. Use control actions to change or trigger service behaviour.
 
-The NETN-SMC FOM module provide base classes for object and interactions to control and describe services in the federation. The provided control action classes are neither publishable nor subscribable but provide the basis for subclassing in other FOM modules.
+The NETN-SMC FOM module provides base classes for objects and interactions to control and describe services in the federation. The provided control action classes are neither publishable nor subscribable but provide the basis for subclassing in other FOM modules.
 
 ## Overview 
 This module provides base classes for sending control actions affecting the federation. Direct the control action by using three different methods. 
@@ -17,15 +17,15 @@ This module provides base classes for sending control actions affecting the fede
 * Use `SMC_FederateControl` for control actions intended for a known federate 
 * Use `SMC_EntityControl` for control actions intended for a federate with the modelling responsibility for the entity. 
  
-In the case of `SMC_FederateControl` and `SMC_EntityControl`, the receiving federate shall respond to the action using a `SMC_Response` interaction to indicate success or failure to accept or achieve the action. 
+In the case of `SMC_FederateControl` and `SMC_EntityControl`, the receiving federate shall respond to the action using an `SMC_Response` interaction to indicate success or failure to accept or achieve the action. 
  
 Federates supporting NETN-SMC control interactions shall publish one or more `SMC_Service` objects in the federation. The `SMC_Service` object class and any subclass defined in other modules define the services provided by the federate. In addition, the `SMC_Service` object class defines a set of supported `FederateControlActions`. The `FederateControlActionEnum` datatype enumerates available types of federate control actions and allows for extension in other modules. 
  
 The `BaseEntity` object class is extended with a list of supported `EntityControlActions`. The `EntityControlActionEnum` datatype enumerates available types of entity control actions and allows for extension in other modules. 
  
-Before sending an `SMC_FederateControl`, use the `SMC_Service` object attribute `SupportedActions` to determine if the referenced federate supports the action. 
+Before sending `SMC_FederateControl`, use the `SMC_Service` object attribute `SupportedActions` to determine if the referenced federate supports the action. 
  
-Before sending an `SMC_EntityControl`, use the `NETN-SMC BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action. 
+Before sending `SMC_EntityControl`, use the `NETN-SMC BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action. 
  
 The standard Request-Response pattern involves a TaskingFederate sending a `SMC_EntityControl` or `SMC_FederateControl` interaction. 
 The referenced federate or the federate responsible for modelling the entity replies using the `SMC_Response` interaction, indicating whether the requested tasking is accepted and successful. 
@@ -54,7 +54,7 @@ BaseEntity : SupportedActions
 
 ### SMC_Service
 
-Represents a service provided by the referenced federate with additional information regarding supported control actions.
+Represents a service the referenced federate provides with additional information regarding supported control actions.
 
 |Attribute|Datatype|Semantics|
 |---|---|---|
@@ -94,7 +94,7 @@ Base class for all control actions applicable to all federates in the federation
 
 ### SMC_FederateControl
 
-Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the `SMC_Service` object attribute `SupportedActions` to determine if the referenced federate supports the action.
+Base class for all control actions directed to a specific federate. The inherited NETN-BASE `UniqueId` parameter matches this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the `SMC_Service` object attribute `SupportedActions` to determine if the referenced federate supports the action.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
@@ -103,7 +103,7 @@ Base class for all control actions directed to a specific federate. The inherite
 
 ### SMC_EntityControl
 
-Control action intended for a federate with primary modelling responsibility for the referenced entity. The inherited NETN-BASE `UniqueId` parameter is used to match this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the NETN-SMC `BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action.
+Control action intended for a federate with primary modelling responsibility for the referenced entity. The inherited NETN-BASE `UniqueId` parameter matches this interaction with a corresponding `SMC_Response`. Before sending this interaction, use the NETN-SMC `BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
@@ -112,7 +112,7 @@ Control action intended for a federate with primary modelling responsibility for
 
 ### SMC_Response
 
-The response provides an indication if the related action was accepted or rejected/failed by a federate. A single response per sent action is expected.
+The response indicates whether the related action was accepted or rejected/failed by a federate. A single response per sent action is expected.
 
 |Parameter|Datatype|Semantics|
 |---|---|---|
@@ -127,16 +127,16 @@ Note that only datatypes defined in this FOM Module are listed below. Please ref
 ### Overview
 |Name|Semantics|
 |---|---|
-|EntityControlActionEnum|Control actions for entities.|
+|EntityControlActionEnum|Enumeration of Entity Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |EntityControlActions|A set of control actions relevant to individual entities in the simulation.|
-|FederateControlActionEnum|SMC Control action enumeration.|
+|FederateControlActionEnum|Enumeration of Federate Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
 |FederateControlActions|A set of control actions for the federate implementing the service.|
         
 ### Enumerated Datatypes
 |Name|Representation|Semantics|
 |---|---|---|
-|EntityControlActionEnum|HLAinteger32BE|Control actions for entities.|
-|FederateControlActionEnum|HLAinteger32BE|SMC Control action enumeration.|
+|EntityControlActionEnum|HLAinteger32BE|Enumeration of Entity Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
+|FederateControlActionEnum|HLAinteger32BE|Enumeration of Federate Control Actions. The datatype is expected to be extended in specific modules defining additional actions.|
         
 ### Array Datatypes
 |Name|Element Datatype|Semantics|

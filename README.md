@@ -9,9 +9,9 @@
 
 The NATO Education and Training Service Management and Control (NETN-SMC) module provides a standard way to send control actions to a federated simulation. The control actions are interactions targeting the federation, an individual federate or an individual simulated entity.
 
-In a federated distributed simulation, the participating systems (federates) provide services to model the synthetic environment. The services use information published in the federation as input and provides data updates and interactions as output. Use control actions to change or trigger service behaviour.
+In a federated distributed simulation, the participating systems (federates) provide services to model the synthetic environment. The services use information published in the federation as input, providing data updates and interactions as output. Use control actions to change or trigger service behaviour.
 
-The NETN-SMC FOM module provide base classes for object and interactions to control and describe services in the federation. The provided control action classes are neither publishable nor subscribable but provide the basis for subclassing in other FOM modules.
+The NETN-SMC FOM module provides base classes for objects and interactions to control and describe services in the federation. The provided control action classes are neither publishable nor subscribable but provide the basis for subclassing in other FOM modules.
 
 ## License
 
