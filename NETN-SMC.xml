@@ -10,7 +10,7 @@
         <applicationDomain></applicationDomain>
         <description>In a federated distributed simulation, the participating systems (federates) provide services to model the synthetic environment. The services use information published in the federation as input, providing data updates and interactions as output. Use control actions to change or trigger service behaviour.</description>
         <useLimitation>The NETN-SMC FOM module provides base classes for objects and interactions to control and describe services in the federation. The provided control action classes are neither publishable nor subscribable but provide the basis for subclassing in other FOM modules.</useLimitation>
-        <useHistory>v1.0 - Version developed by MSG-191. Release included in NETN FOM v4.0</useHistory>
+        <useHistory notes="netn-smc_changelog">v1.0 - Version developed by MSG-191. Release included in NETN FOM v4.0</useHistory>
         <poc>
             <pocType>Release authority</pocType>
             <pocName>NATO Modelling and Simulation Group</pocName>
@@ -204,14 +204,14 @@ The referenced federate or the federate responsible for modelling the entity rep
  
 ```mermaid 
 sequenceDiagram 
-autonumber
+autonumber 
 TaskingFederate-&gt;&gt;EntityFederate:SMC_EntityControl(entity) 
 EntityFederate-&gt;&gt;TaskingFederate:SMC_Response(true/false) 
 ````</semantics>
         </note>
         <note>
             <label>netn-smc_changelog</label>
-            <semantics></semantics>
+            <semantics>Initial Version</semantics>
         </note>
     </notes>
 </objectModel>
