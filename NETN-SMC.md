@@ -4,38 +4,43 @@
 |---|---|---|
 |1.0|2023-11-20|NETN-BASE|
 
-The NATO Education and Training Service Management and Control (NETN-SMC) module provides a standard way to send control actions to a federated simulation. The control actions are interactions targeting the federation, an individual federate or an individual simulated entity.
+The NATO Education and Training Service Management and Control (NETN-SMC) module provides a standard way to send control actions in a federated simulation. Control actions are interactions targeting the federation, an individual federate, or an individual simulated entity.
 
-In a federated distributed simulation, the participating systems (federates) provide services to model the synthetic environment. The services use information published in the federation as input, providing data updates and interactions as output. Use control actions to change or trigger service behaviour.
+In a federated distributed simulation, the participating systems (federates) provide services to model aspects of the synthetic environment. To simulate model change, these services use operator input, data published in the federation, and the passing of scenario time.
 
-The NETN-SMC FOM module provides base classes for objects and interactions to control and describe services in the federation. The provided control action classes are neither publishable nor subscribable but provide the basis for subclassing in other FOM modules.
+The NETN-SMC module provides methods to interact with services using control actions and defines a Request-Response pattern. The control actions described in this module form the basis for subclassing more specific actions in other FOM modules.
 
 ## Overview 
-This module provides base classes for sending control actions affecting the federation. Direct the control action by using three different methods. 
+The module defines three (3) basic control actions 
  
-* Use the `SMC_FederationControl` for control actions intended for all federates. 
-* Use `SMC_FederateControl` for control actions intended for a known federate 
-* Use `SMC_EntityControl` for control actions intended for a federate with the modelling responsibility for the entity. 
+* Use the `SMC_FederationControl` for actions intended for all federates in the federation. 
+* Use `SMC_FederateControl` for  actions intended for a known federate 
+* Use `SMC_EntityControl` for actions related to a specific simulation entity. The interaction is expected to be processed by the federate with the modelling responsibility for the entity. 
  
-In the case of `SMC_FederateControl` and `SMC_EntityControl`, the receiving federate shall respond to the action using an `SMC_Response` interaction to indicate success or failure to accept or achieve the action. 
- 
-Federates supporting NETN-SMC control interactions shall publish one or more `SMC_Service` objects in the federation. The `SMC_Service` object class and any subclass defined in other modules define the services provided by the federate. In addition, the `SMC_Service` object class defines a set of supported `FederateControlActions`. The `FederateControlActionEnum` datatype enumerates available types of federate control actions and allows for extension in other modules. 
- 
-The `BaseEntity` object class is extended with a list of supported `EntityControlActions`. The `EntityControlActionEnum` datatype enumerates available types of entity control actions and allows for extension in other modules. 
- 
-Before sending `SMC_FederateControl`, use the `SMC_Service` object attribute `SupportedActions` to determine if the referenced federate supports the action. 
- 
-Before sending `SMC_EntityControl`, use the `NETN-SMC BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action. 
- 
-The standard Request-Response pattern involves a TaskingFederate sending a `SMC_EntityControl` or `SMC_FederateControl` interaction. 
-The referenced federate or the federate responsible for modelling the entity replies using the `SMC_Response` interaction, indicating whether the requested tasking is accepted and successful. 
- 
+When sending a `SMC_FederateControl` or `SMC_EntityControl` action, the receiving federate shall respond to the action using a `SMC_Response` interaction to indicate success or failure to accept or achieve the action. 
+
 ```mermaid 
 sequenceDiagram 
 autonumber
 TaskingFederate->>EntityFederate:SMC_EntityControl(entity) 
 EntityFederate->>TaskingFederate:SMC_Response(true/false) 
-````
+```
+ 
+## Federate Control Action
+
+To send a control action to a specific federate, use the `SMC_FederateControl` interaction with a parameter identifying the federate by its name.
+
+If a federate control action is sent to a federate that is not compliant with NETN-SMC, there will be no response, and it will be hard to determine if or when the control action is successfully received. 
+
+Federates publish support actions using the `SMC_Service` object attribute `SupportedActions`. If available, this information shall be used before sending a federate control action to check whether the action is supported.
+
+All NETN-SMC-compliant federates must also respond to all federate control actions using the `SMC_Response` interaction, regardless of whether the action is supported.
+
+## Entity Control Action
+
+To send a control action to a specific simulation entity, use the `SMC_EntityControl` interaction with a parameter identifying the entity by its unique identifier. The federate with the referenced entity's primary modelling responsibility is the receiver and should perform the action.
+
+If the federate with the primary responsibility of the referenced entity is not compliant with NETN-SMC, there will be no response, and it will be hard to determine if or when the control action is successfully received. Therefore, supported actions are published using the `BaseEntity` object class attribute. Before sending a `SMC_EntityControl`, use the `BaseEntity` object attribute `SupportedActions` to determine if the referenced entity supports the action.
 
 
 ## Object Classes
